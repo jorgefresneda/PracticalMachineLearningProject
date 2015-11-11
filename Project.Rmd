@@ -6,7 +6,7 @@
 The data is loaded like this:
  
 -```{r}
-+```{r,message=FALSE}
+
  # Libraries needed for the whole study
  library(ggplot2)
  library(caret)
@@ -15,8 +15,7 @@ The data is loaded like this:
 -
 +library(doMC)
 +registerDoMC(cores=4)
-+```
-+```{r}
+
  data <- tbl_df(read.csv("pml-training.csv"))
 +dim(data)
  ```
