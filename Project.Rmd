@@ -22,6 +22,14 @@ We can see the dataset has 160 variables, which is really large.
 
 ##Cleaning the data
 
+```{r}
+ keep_columns <- is.na(data) %>%
+   apply(2, sum) %>%
+   (function(m) { m[m < dim(data)[1]/2] }) %>%
+   names
+ ```
+ 
+The last cleaning step consists of removing columns we do not want to train on because they do not make sense for the project. The first obvious outliers are `X`, `user_name` and the timestamps. For the timestamps, at most we would want to use a time span from the start of the exercise, but never the raw timestamps. A bit less obvious, the `new_window` and `num_window`variables indicate when the averaging is done and are probably not very useful in themselved.
 First, the data contained some division by zero errors: these have been replaced by NA using a standard text editor.
 
 Then, I removed variables with mostly NA. For this, I create a list of columns I want to keep:
