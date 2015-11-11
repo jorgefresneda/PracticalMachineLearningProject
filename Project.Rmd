@@ -54,3 +54,53 @@ For the cross validation, we are going to split the samples along the `classe` v
  training <- clean_data[inTrain,]
  testing <- clean_data[-inTrain,]
  ```
+
+However, given the time needed to create a single estimator, we are not going to use this for model selection. It is worth noting that the caret random forest method will itself use bootstrapping to select the best tree.
+
+##Preprocessing of the data
+
+To reduce the number of variables, we use PC analysis, keeping 95% of the variability, and put back the classes:
+
+```{r}
+ numTraining <- select(training, -classe)
+ preProcPC <- preProcess(numTraining, method=c("pca"), thresh=0.9)
+ trainPC <- preProcPC %>%
+   predict(numTraining) %>%
+   mutate(classe=training$classe)
+ ```
+ 
+##Using the Random Forest
+
+We now use the main classification algorithm: the random forest.
+
+```{r}
+PCForestFit <- train(classe ~ ., data=trainPC, method="rf", prox=TRUE)
+```
+
+##Accuracy predictions
+
+To evaluate the accuracy, we are going to use the testing subset of the original data, and assume all the outcome are equiprobable:
+
+```{r}
+ PCtesting <- predict(preProcPC, select(testing, -classe))
+ predPCForest <- predict(PCForestFit, PCtesting)
+ confusionForest <- confusionMatrix(predPCForest, testing$classe, prevalence=c(A=0.2, B=0.2, C=0.2, D=0.2, E=0.2))
+ print(confusionForest)
+ ```
+ 
+ The interesting line is the Positive Predictive Value, which tells us how likely is the answer is of the predicted class, depending on the prediction. The model then gives us the predicted overall accuracy with a confidence interval:
+ 
+ ```{r}
+confusionForest$overall[c("Accuracy", "AccuracyLower", "AccuracyUpper")]
+```
+
+##Predictions on the testing dataset
+
+```{r}
+test_columns <- keep_columns[which(keep_columns != "classe")]
+test <- tbl_df(read.csv("pml-testing.csv"))[test_columns]
+
+testPC <- predict(preProcPC, test)
+testPredictions <- predict(PCForestFit, testPC)
+print(testPredictions)
+```
