@@ -1,9 +1,8 @@
-#Introduction
+##Introduction
 
  
- In this project, we are going to analyse data about weight lifted exercises coming from http://groupware.les.inf.puc-rio.br/har.
- In this experiment, the team asked a number of non-experienced weight lifters to exercise either correctly or incorrectly,
-
+ In this project, we are going to analyse data about weight lifted exercises coming from http://groupware.les.inf.puc-rio.br/har. In this experiment, the team asked a number of non-experienced weight lifters to exercise either correctly or incorrectly, but with a specific error. The exercise was supervied by an experienced trainer to ensure it was performed either correctly or with the right error.
+ 
 The data is loaded like this:
  
 -```{r}
@@ -22,11 +21,10 @@ The data is loaded like this:
 +dim(data)
  ```
  
-+We can see the dataset has 160 variables, which is really large.
-+
- Cleaning the data
--=================
-+-----------------
+ We can see the dataset has 160 variables, which is really large.
+
+## Cleaning the data
+
  
 -First, the data contained some division by zero errors. These have been replaced by simple NA using a standard text editor.
 +First, the data contained some division by zero errors: these have been replaced by NA using a standard text editor.
