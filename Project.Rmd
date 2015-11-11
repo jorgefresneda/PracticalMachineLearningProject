@@ -6,7 +6,6 @@
 The data is loaded like this:
  
 -```
-
  # Libraries needed for the whole study
  library(ggplot2)
  library(caret)
@@ -17,7 +16,7 @@ The data is loaded like this:
 +registerDoMC(cores=4)
 
  data <- tbl_df(read.csv("pml-training.csv"))
-+dim(data)
++dim(data) {r}
  ```
  
  We can see the dataset has 160 variables, which is really large.
