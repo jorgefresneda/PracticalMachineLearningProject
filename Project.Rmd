@@ -74,7 +74,7 @@ To reduce the number of variables, we use PC analysis, keeping 95% of the variab
 We now use the main classification algorithm: the random forest.
 
 ```{r}
-PCForestFit <- train(classe ~ ., data=trainPC, method="rf", prox=TRUE)
+ PCForestFit <- train(classe ~ ., data=trainPC, method="rf", prox=TRUE)
 ```
 
 ##Accuracy predictions
@@ -91,16 +91,16 @@ To evaluate the accuracy, we are going to use the testing subset of the original
  The interesting line is the Positive Predictive Value, which tells us how likely is the answer is of the predicted class, depending on the prediction. The model then gives us the predicted overall accuracy with a confidence interval:
  
  ```{r}
-confusionForest$overall[c("Accuracy", "AccuracyLower", "AccuracyUpper")]
+ confusionForest$overall[c("Accuracy", "AccuracyLower", "AccuracyUpper")]
 ```
 
 ##Predictions on the testing dataset
 
 ```{r}
-test_columns <- keep_columns[which(keep_columns != "classe")]
-test <- tbl_df(read.csv("pml-testing.csv"))[test_columns]
+ test_columns <- keep_columns[which(keep_columns != "classe")]
+ test <- tbl_df(read.csv("pml-testing.csv"))[test_columns]
 
-testPC <- predict(preProcPC, test)
-testPredictions <- predict(PCForestFit, testPC)
-print(testPredictions)
+ testPC <- predict(preProcPC, test)
+ testPredictions <- predict(PCForestFit, testPC)
+ print(testPredictions)
 ```
