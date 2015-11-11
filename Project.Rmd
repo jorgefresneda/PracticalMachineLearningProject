@@ -36,9 +36,9 @@ Then, I removed variables with mostly NA. For this, I create a list of columns I
 The last cleaning step consists of removing columns we do not want to train on because they do not make sense for the project. The first obvious outliers are `X`, `user_name` and the timestamps. For the timestamps, at most we would want to use a time span from the start of the exercise, but never the raw timestamps. A bit less obvious, the `new_window` and `num_window`variables indicate when the averaging is done and are probably not very useful in themselved.
 
 ```{r}
-summary(cars)
-to_remove <- c("X", "user_name", "raw_timestamp_part_1", "raw_timestamp_part_2", "cvtd_timestamp", "new_window", "num_window")
-keep_columns <- keep_columns[which(!keep_columns %in% to_remove)]
-clean_data <- data[keep_columns]
-dim(clean_data)
+ summary(cars)
+ to_remove <- c("X", "user_name", "raw_timestamp_part_1", "raw_timestamp_part_2", "cvtd_timestamp", "new_window",   "num_window")
+ keep_columns <- keep_columns[which(!keep_columns %in% to_remove)]
+ clean_data <- data[keep_columns]
+ dim(clean_data)
  ```
