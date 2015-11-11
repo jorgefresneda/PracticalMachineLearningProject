@@ -48,3 +48,9 @@ Now, we have only 53 variable lefts, which is more reasonnable, although still v
 ##Cross-Validation
 
 For the cross validation, we are going to split the samples along the `classe` variable to ensure we have representative of all the classes in the test set. As we have a lot of data and variables, we are going to split the dataset halfway into a training and testing dataset:
+
+```{r}
+ inTrain <- createDataPartition(clean_data$classe, p=0.5, list=FALSE)
+ training <- clean_data[inTrain,]
+ testing <- clean_data[-inTrain,]
+ ```
