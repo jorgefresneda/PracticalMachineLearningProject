@@ -11,9 +11,8 @@ The data is loaded like this:
  library(caret)
  library(dplyr)
  library(randomForest)
--
-library(doMC)
-registerDoMC(cores=4)
+ library(doMC)
+ registerDoMC(cores=4)
 ```
 ```{r}
  data <- tbl_df(read.csv("pml-training.csv"))
