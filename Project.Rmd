@@ -42,3 +42,9 @@ The last cleaning step consists of removing columns we do not want to train on b
  clean_data <- data[keep_columns]
  dim(clean_data)
  ```
+
+Now, we have only 53 variable lefts, which is more reasonnable, although still very large. It is worth nothing that, at that stage, `classe` is the only factor left in the dataset.
+
+##Cross-Validation
+
+For the cross validation, we are going to split the samples along the `classe` variable to ensure we have representative of all the classes in the test set. As we have a lot of data and variables, we are going to split the dataset halfway into a training and testing dataset:
