@@ -18,3 +18,10 @@ The data is loaded like this:
  data <- tbl_df(read.csv("pml-training.csv"))
 dim(data)
  ```
+We can see the dataset has 160 variables, which is really large.
+
+##Cleaning the data
+
+First, the data contained some division by zero errors: these have been replaced by NA using a standard text editor.
+
+Then, I removed variables with mostly NA. For this, I create a list of columns I want to keep:
