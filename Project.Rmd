@@ -5,7 +5,7 @@
  
 The data is loaded like this:
  
--```{r}
+-```
 
  # Libraries needed for the whole study
  library(ggplot2)
